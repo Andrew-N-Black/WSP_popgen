@@ -55,3 +55,17 @@ cat SC.qa.depthGlobal | tr "\t" "\n" | awk '{print $0,NR}' | head -n 501 > SC_gl
 zz<-read.table("LR_global")
 ggplot(data=y,aes(x=V1,y=V2))+geom_bar(stat="identity")+theme_classic()+xlab("Global Depth SC")+ylab("Sites")
 ggsave("SC_depth.svg")
+
+
+#Depth by Individual / population:
+ls ../cleaned/*1.fq.gz | cut -c 12-18 > samp.names
+ls ../cleaned/*1.fq.gz | cut -c 12-13 > pop.names
+paste samp.names pop.names ALL.qa.depthSample | sed 's/\t/ /g' > conSamp
+
+a<-read.table("conSamp")
+sam_sub<-a[1:22]
+library(reshape2)
+b <- melt(sam_sub, id.vars=c("V1","V2"))
+ggplot(b, aes(x=variable,y=value,fill=as.factor(V2))) + geom_bar(stat="identity")+theme_classic()+facet_wrap(~V2,ncol=1)+scale_fill_manual(name="Population", values =c("SC"> slateblue","LR"="black","MS"="green"))
+
+
