@@ -15,17 +15,43 @@ module load angsd/0.935
 
 REF=/scratch/bell/blackan/PUPFISH/C.tularosa/assembly/ncbi/Cyprinodon-tularosa/GCF_016077235.1_ref/ref.fa
 
-#Dump output files for All samples
+#####Dump output files for All samples####
 angsd -P 25 -b ALL_bamlist -ref $REF -out ../angsd_out/ALL.qa \
         -doQsDist 1 -doDepth 1 -doCounts 1 -maxDepth 500 -dumpCounts 1
-#Dump output files ONLY for Lost River samples
+ 
+#Transpose and add row numbers, corresponding to cov, then plot in R
+cat ALL.qa.depthGlobal | tr "\t" "\n" | awk '{print $0,NR}' | head -n 501 > wsp_global
+x<-read.table("wsp_global")
+library("ggplot2")
+ggplot(data=x,aes(x=V1,y=V2))+geom_bar(stat="identity")+theme_classic()+xlab("Global Depth")+ylab("Sites")
+ggsave("All_depth.svg")
+
+####Dump output files ONLY for Lost River samples#####
 angsd -P 25 -b LR_bamlist.txt -ref $REF -out ../angsd_out/LR.qa \
         -doQsDist 1 -doDepth 1 -doCounts 1 -maxDepth 500 -dumpCounts 1
-#Dump output files ONLY for Malpais Spring samples
+
+#Transpose and add row numbers, corresponding to cov, then plot in R
+cat LR.qa.depthGlobal | tr "\t" "\n" | awk '{print $0,NR}' | head -n 501 > LR_global
+y<-read.table("LR_global")
+ggplot(data=y,aes(x=V1,y=V2))+geom_bar(stat="identity")+theme_classic()+xlab("Global Depth LR")+ylab("Sites")
+ggsave("LR_depth.svg")
+
+###Dump output files ONLY for Malpais Spring samples####
 angsd -P 25 -b MS_bamlist.txt -ref $REF -out ../angsd_out/MS.qa \
         -doQsDist 1 -doDepth 1 -doCounts 1 -maxDepth 500 -dumpCounts 1
+        
+#Transpose and add row numbers, corresponding to cov, then plot in R
+cat MS.qa.depthGlobal | tr "\t" "\n" | awk '{print $0,NR}' | head -n 501 > MS_global
+z<-read.table("LR_global")
+ggplot(data=z,aes(x=V1,y=V2))+geom_bar(stat="identity")+theme_classic()+xlab("Global Depth MS")+ylab("Sites")
+ggsave("MS_depth.svg")
+
 #Dump output files ONLY for Salt Creek samples
 angsd -P 25 -b SC_bamlist.txt -ref $REF -out ../angsd_out/SC.qa \
         -doQsDist 1 -doDepth 1 -doCounts 1 -maxDepth 500 -dumpCounts 1
-        
-#Output files will need to be manually modified prior to plotting (see R/QA.R plots)
+
+#Transpose and add row numbers, corresponding to cov, then plot in R
+cat SC.qa.depthGlobal | tr "\t" "\n" | awk '{print $0,NR}' | head -n 501 > SC_global
+zz<-read.table("LR_global")
+ggplot(data=y,aes(x=V1,y=V2))+geom_bar(stat="identity")+theme_classic()+xlab("Global Depth SC")+ylab("Sites")
+ggsave("SC_depth.svg")
