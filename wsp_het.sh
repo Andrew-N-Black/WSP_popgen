@@ -59,7 +59,12 @@ shapiro.test(het_pupfish$het)
 data:  het_pupfish$het
 W = 0.91489, p-value = 0.002849
 
-#Therefore, do non-parameteric for three pairwise tests
+# Split into three datasets, based upon pop
+LR<-het_pupfish[1:15,]
+SC<-het_pupfish[31:45,]
+MS<-het_pupfish[16:30,]
+
+#do non-parameteric for three pairwise tests based upon wilk
 wilcox.test(LR$het,SC$het)
 
 	Wilcoxon rank sum exact test
