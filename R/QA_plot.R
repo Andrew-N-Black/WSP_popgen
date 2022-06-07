@@ -31,9 +31,15 @@ ggsave("SC_depth.svg")
 
 
 a<-read.table("conSamp")
-sam_sub<-a[1:22]
+a_sub<-a[1:22]
+colnames(a_sub)<-c("Sample","Population","1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20")
 library(reshape2)
-b <- melt(sam_sub, id.vars=c("V1","V2"))
-ggplot(b, aes(x=variable,y=value,fill=as.factor(V2))) + geom_bar(stat="identity")+theme_classic()+facet_wrap(~V2,ncol=1)+scale_fill_manual(name="Population", values =c("SC"> slateblue","LR"="black","MS"="green"))
 
+library(plyr)
+neworder<-c("MS","SC","LR")
+
+b <- melt(a_sub, id.vars=c("Sample","Population"))
+neworder<-c("MS","SC","LR")
+b2<-arrange(transform(b,Population=factor(Population,levels=neworder)),Population)
+ggplot(b2, aes(x=variable,y=value,fill=as.factor(Population))) + geom_bar(stat="identity")+theme_classic()+facet_wrap(~Population,ncol=1)+scale_fill_manual( values =c("SC"="black","LR"="black","MS"="darkgrey"))+ theme(legend.position="none")+xlab("Coverage Level")+ylab("Number of Nucleotides")ggsave("Population_depth.svg")
 
