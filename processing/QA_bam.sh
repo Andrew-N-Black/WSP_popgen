@@ -46,4 +46,11 @@ angsd -P 25 -b SC_bamlist.txt -ref $REF -out ../angsd_out/SC.qa \
 cat SC.qa.depthGlobal | tr "\t" "\n" | awk '{print $0,NR}' | head -n 501 > SC_global
 
 #Once complete, run plot_QA.R
+library(reshape2)
+a <- read.table("conSamp")
+a_sub<-a[1:22]
+colnames(a_sub)<-c("Sample","Population","1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20")
+b <- melt(a_sub, id.vars=c("Sample","Population"))
+ggplot(b, aes(x=variable,y=value,fill=as.factor(Population))) + geom_bar(stat="identity")+theme_classic()+facet_wrap(~Population,ncol=1)+scale_fill_manual( values =c("SC"="black","LR"="black","MS"="darkgrey"))
+
 
