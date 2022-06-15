@@ -24,7 +24,7 @@ ls -1 ../final_bams/*bam | sed 's/\//\'$'\t/g' | cut -f 3| sed 's/.bam//g' |sed 
 
 do
 
-angsd -i ../final_bams/${LINE}_filt.bam -ref $REF -anc $REF -dosaf 1 -minQ 35 -GL 2 -P 20 -out ${OUTDIR}/${LINE} 
+angsd -i ../final_bams/${LINE}_filt.bam -ref $REF -anc $REF -dosaf 1 -minQ 35 -GL 1 -P 20 -out ${OUTDIR}/${LINE} 
 
 /depot/fnrdewoody/apps/angsd/misc/realSFS -P 20 -fold 1 ${OUTDIR}/${LINE}.saf.idx > ${OUTDIR}/${LINE}_est.ml
 
