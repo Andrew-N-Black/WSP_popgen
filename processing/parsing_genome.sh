@@ -15,3 +15,4 @@ cat GCF_016077235.1.gtf |
   gzip > my_intergenic.bed.gz
   
   
+awk '{print $1}' exon.beagle | sed 's/NW_/NW./g'| tr "1_" "1\t" | sed 's/NW./NW_/g' > ../exons.bed
