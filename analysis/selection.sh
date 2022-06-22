@@ -26,3 +26,6 @@ qplot(-log10(exon_df$pval), geom="density",main = "Exon selection",xlab = "-log1
 
 
 
+#PCADAPT
+library(pcadapt)
+s<-npyLoad("EXON.pcadapt.zscores.npy")
