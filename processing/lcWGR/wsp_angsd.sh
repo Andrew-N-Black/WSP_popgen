@@ -38,7 +38,7 @@ angsd -P 80 -out /scratch/bell/blackan/PUPFISH/C.tularosa/popgen/illumina/angsd_
 #Get list of sites:
 gzip -d EXON.beagle.gz
 awk '{print $1}' EXON.beagle | sed 's/NW_/NW./g' | sed 's/_/\t/g' | sed 's/NW./NW_/g' | tail -n +2 > EXON.SITES
-gzip EXON.beagle.gz
+gzip EXON.beagle
 
 
 #Index intergenic sites
@@ -55,7 +55,7 @@ angsd -P 80 -out /scratch/bell/blackan/PUPFISH/C.tularosa/popgen/illumina/angsd_
 #Get list of sites:
 gzip -d INTER.beagle.gz
 awk '{print $1}' INTER.beagle | sed 's/NW_/NW./g' | sed 's/_/\t/g' | sed 's/NW./NW_/g' | tail -n +2 > INTER.SITES
-gzip INTER.beagle.gz
+gzip INTER.beagle
 
 
 
