@@ -104,8 +104,8 @@ cd ../final_bams/
 PicardCommandLine BuildBamIndex INPUT=${line[0]}_filt.bam
 
 #Summary stats on files
-samtools depth -a ${line[0]}_filt.bam | awk '{c++;s+=\$3}END{print s/c}' > ${line[0]}_depth.txt
-samtools depth -a ${line[0]}_filt.bam | awk '{c++; if(\$3>0) total+=1}END{print (total/c)*100}' > ${line[0]}_1x_breadth.txt
+samtools depth -a ${line[0]}_filt.bam | awk '{c++;s+=$3}END{print s/c}' > ${line[0]}_depth.txt
+samtools depth -a ${line[0]}_filt.bam | awk '{c++; if($3>0) total+=1}END{print (total/c)*100}' > ${line[0]}_1x_breadth.txt
 
 samtools stats ${line[0]}_filt.bam > ${line[0]}_samtools_stats.txt" > ./jobs/${line[0]}_alignment.sh
 
