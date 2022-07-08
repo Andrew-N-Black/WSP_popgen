@@ -1,13 +1,4 @@
 
-
-
-
-
-
-
-
-
-
 #Define Populations
 #head pop*
 #==> pop_1.txt <==
