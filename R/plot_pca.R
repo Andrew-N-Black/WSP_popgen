@@ -23,10 +23,10 @@ head(popmap)
 axes<-eigen(cov)
 #print out eigenvalues for PCA axes
 axes$values/sum(axes$values)*100
-#[1] 0.415583848 0.033612403
+#[1] 43.6212647  3.1988981
 
 #Save as dataframe and plot
-PC1_3<-as.data.frame(x$vectors[,1:3])
+PC1_3<-as.data.frame(axes$vectors[,1:3])
 title<-"Population"
 
 ggplot(data=PC1_3, aes(y=V2, x=V1, shape=as.factor(popmap$population),color=as.factor(popmap$ESU)))+geom_point(size=5)+ theme_classic() + xlab("PC1 (41.5%)") +ylab("PC2 (3.3%)")+scale_color_manual(name="", values =c("ESU-1"="black","ESU-2"="darkgrey"))+geom_hline(yintercept=0,linetype="dashed")+geom_vline(xintercept =0,linetype="dashed")+scale_shape_manual(title,values=c(20,18,4))
