@@ -28,4 +28,30 @@ qplot(-log10(exon_df$pval), geom="density",main = "Exon selection",xlab = "-log1
 
 #PCADAPT
 library(pcadapt)
+library(RcppCNPy)
+library(bigutilsr)
+
 s<-npyLoad("EXON.pcadapt.zscores.npy")
+
+#	args[1]: zscores matrix
+#	args[2]: prefix for output files
+#
+
+args = commandArgs(trailingOnly=TRUE)
+
+
+
+zscores <- npyLoad(s)
+K <- ncol(zscores)
+
+# For one component only
+if (K == 1) {
+	d2 <- (zscores - median(zscores))^2
+} else {
+	d2 <- dist_ogk(zscores)
+}
+
+write.table(d2, file=paste0(pupfish, ".pcadapt.test.txt"), quote=F, row.names=F, col.names=F)
+write.table(pchisq(d2, df=K, lower.tail=F), file=paste0(args[2], ".pcadapt.pval.txt"), quote=F, row.names=F, col.names=F)
+
+
