@@ -3,6 +3,7 @@
 # 2) Individual coverage, factored by population
 # 3) Phred score distribution
 
+#Edit Global file by transposing and adding 1:501 row.names
 setWD("/scratch/bell/blackan/PUPFISH/C.tularosa/popgen/illumina/angsd_out") 
 x<-read.table("wsp_global")
 library("ggplot2")
@@ -11,6 +12,7 @@ ggsave("All_depth.svg")
 quit()
 
 
+#Edit by pasting sample names in col.1 and population origin in col.2.
 a<-read.table("conSamp")
 a_sub<-a[1:22]
 colnames(a_sub)<-c("Sample","Population","1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20")
