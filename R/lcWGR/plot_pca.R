@@ -1,6 +1,10 @@
+#Plot individual PCA from lcWGR data
+
+
 library(ggplot)
 #Read in metadata
-popmap <- read.delim("~/popmap", header=FALSE)
+setwd("~/Files")
+popmap <- read.delim("popmap", header=FALSE)
 
 #Add col names
 names(popmap)<-c("sample","population","ESU")
@@ -16,7 +20,7 @@ head(popmap)
 #Low Coverage Whole Genome Resequencing pca 
 
 #Read in covariation matrix and metadata
-cov<-as.matrix(read.table("~/FINAL.cov"))
+cov<-as.matrix(read.table("FINAL.cov"))
 
 #Extract eigenvalues
 axes<-eigen(cov)
@@ -30,5 +34,7 @@ title<-"Population"
 
 ggplot(data=PC1_3, aes(y=V2, x=V1, shape=as.factor(popmap$population),color=as.factor(popmap$ESU)))+geom_point(size=5)+ theme_classic() + xlab("PC1 (41.5%)") +ylab("PC2 (3.3%)")+scale_color_manual(name="", values =c("ESU-1"="black","ESU-2"="darkgrey"))+geom_hline(yintercept=0,linetype="dashed")+geom_vline(xintercept =0,linetype="dashed")+scale_shape_manual(title,values=c(20,18,4))
 ggsave("Fig_1B.svg")
+
+#DONE
 
 
