@@ -1,5 +1,8 @@
-#Use Excel to calculate proportion of heterozygotes from wsp_het.sh, then import file:
+#Plot individual heterozygosity
 
+#Use Excel to calculate proportion of heterozygotes from wsp_het.sh, then import file:
+#Set working directory
+setwd("~/Files")
 #Import into R
 het_pupfish <- read_excel("het_pupfish.xlsx")
 #Assign factor
@@ -43,3 +46,5 @@ wilcox.test(SC$het,MS$het)
 #Wilcoxon rank sum exact test
 #data:  SC$het and MS$het
 #W = 0, p-value = 1.289e-08
+
+#DONE
