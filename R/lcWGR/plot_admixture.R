@@ -1,6 +1,6 @@
 #Plot Q matrx (Figure 2)
 library(pophelper)
-setwd("~/files")
+setwd("~/Files")
 k2<-readQ("FINAL_K2.qopt")
 k3<-readQ("FINAL_K3.qopt")
 
