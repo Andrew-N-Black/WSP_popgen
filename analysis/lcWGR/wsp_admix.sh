@@ -12,27 +12,26 @@ module purge
 module load bioinfo
 
 
-/depot/fnrdewoody/apps/angsd/misc/NGSadmix -P 64  \
-                -K 1 -minMaf 0.05 -maxiter 50000 -tol 1e-9 -tolLike50 1e-9 \
-                -likes /scratch/bell/blackan/PUPFISH/C.tularosa/popgen/illumina/angsd_out/FINAL.beagle.gz \
-                -outfiles  /scratch/bell/blackan/PUPFISH/C.tularosa/popgen/illumina/angsd_out/ADX/FINAL_K1
           
-
+#Run NGS admix for K2 on filtered beagle GL file
 /depot/fnrdewoody/apps/angsd/misc/NGSadmix -P 64  \
                 -K 2 -minMaf 0.05 -maxiter 50000 -tol 1e-9 -tolLike50 1e-9 \
                 -likes /scratch/bell/blackan/PUPFISH/C.tularosa/popgen/illumina/angsd_out/FINAL.beagle.gz \
                 -outfiles  /scratch/bell/blackan/PUPFISH/C.tularosa/popgen/illumina/angsd_out/ADX/FINAL_K2  
 
+#Run NGS admix for K3 on filtered beagle GL file
 /depot/fnrdewoody/apps/angsd/misc/NGSadmix -P 64  \
                 -K 3 -minMaf 0.05 -maxiter 50000 -tol 1e-9 -tolLike50 1e-9 \
                 -likes /scratch/bell/blackan/PUPFISH/C.tularosa/popgen/illumina/angsd_out/FINAL.beagle.gz \
                 -outfiles  /scratch/bell/blackan/PUPFISH/C.tularosa/popgen/illumina/angsd_out/ADX/FINAL_K3  
 
+#Run NGS admix for K4 on filtered beagle GL file
 /depot/fnrdewoody/apps/angsd/misc/NGSadmix -P 64  \
                 -K 4 -minMaf 0.05 -maxiter 50000 -tol 1e-9 -tolLike50 1e-9 \
                 -likes /scratch/bell/blackan/PUPFISH/C.tularosa/popgen/illumina/angsd_out/FINAL.beagle.gz \
                 -outfiles  /scratch/bell/blackan/PUPFISH/C.tularosa/popgen/illumina/angsd_out/ADX/FINAL_K4  
 
+#Run NGS admix for K5 on filtered beagle GL file
 /depot/fnrdewoody/apps/angsd/misc/NGSadmix -P 64  \
                 -K 5 -minMaf 0.05 -maxiter 50000 -tol 1e-9 -tolLike50 1e-9 \
                 -likes /scratch/bell/blackan/PUPFISH/C.tularosa/popgen/illumina/angsd_out/FINAL.beagle.gz \
