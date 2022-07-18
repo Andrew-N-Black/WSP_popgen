@@ -1,7 +1,7 @@
-
+#Plot pool-seq PCA
 library(ggplot)
 #Read in metadata
-popmap <- read.delim("~/popmap", header=FALSE)
+popmap <- read.delim("popmap", header=FALSE)
 
 #Add col names
 names(popmap)<-c("sample","population","ESU")
