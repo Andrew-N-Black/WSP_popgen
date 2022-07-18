@@ -9,6 +9,9 @@ library(reshape2)
 library(plyr)
 library(data.table)
 
+#Set working directory folder containing all files:
+setwd("~/files/)
+
 #Global Depth, all samples together (Fig_S1)
 #Edit Global file by transposing and adding 1:501 row.names
 x<-read.table("ALL_global")
