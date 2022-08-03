@@ -1,4 +1,8 @@
-#Plot individual heterozygosity
+#Plot and test significance of individual heterozygosity
+#R version 4.2.0
+#ggplot2 version 3.3.6
+#ggpubr version 0.4.0 
+#dplyr version 1.0.9
 
 #Use Excel to calculate proportion of heterozygotes from wsp_het.sh, then import file:
 #Set working directory
@@ -13,8 +17,8 @@ ggplot(het_pupfish,aes(x=pop,y=het,fill=pop))+geom_boxplot(show.legend =FALSE)+s
 ggsave("Figure_2.svg")
 
 #Test for normallity then sig
-library("ggpubr")
-library("dplyr")
+library(ggpubr)
+library(dplyr)
 
 #How het estimates fits distribution
 ggqqplot(het_pupfish$het)
