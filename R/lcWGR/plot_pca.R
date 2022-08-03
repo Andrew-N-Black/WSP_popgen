@@ -1,4 +1,6 @@
 #Plot individual PCA from lcWGR data
+#R version 4.2.0
+#ggplot2 version 3.3.6
 
 
 library(ggplot)
