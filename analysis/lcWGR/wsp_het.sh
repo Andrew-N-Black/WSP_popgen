@@ -9,7 +9,7 @@
 
 ml biocontainers
 ml angsd
-ml R
+
 
 #Path to parent directory of genus-species
 PD=/scratch/bell/blackan/PUPFISH/C.tularosa/popgen/illumina/angsd_out/
@@ -32,6 +32,9 @@ done
 
 #Get individual heterozygosity, proportion of heterozygotes:
 cat ./*ml
+
+#Use output from cat command for calculate prop heterozygote
+#DONE
 
 
 
