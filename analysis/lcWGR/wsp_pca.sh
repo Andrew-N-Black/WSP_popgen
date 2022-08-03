@@ -11,7 +11,6 @@
 
 module load biocontainers
 module load pcangsd
-module load angsd
 
 
 REF=/scratch/bell/blackan/PUPFISH/C.tularosa/assembly/ncbi/Cyprinodon-tularosa/GCF_016077235.1_ref/ref.fa
@@ -29,4 +28,4 @@ pcangsd -b /scratch/bell/blackan/PUPFISH/C.tularosa/popgen/illumina/angsd_out/IN
 -o /scratch/bell/blackan/PUPFISH/C.tularosa/popgen/illumina/angsd_out/pca/FINAL --threads 50 --pcadapt --inbreedSamples
 
 
-
+#DONE
