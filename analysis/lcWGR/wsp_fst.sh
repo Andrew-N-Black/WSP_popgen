@@ -74,4 +74,14 @@ realSFS fst index ../angsd_out/fst/MS.saf.idx ../angsd_out/fst/LR.saf.idx ../ang
 
 realSFS fst stats2 ../angsd_out/fst/three_pop.fst.idx -win 50000 -step 10000 -P 126 > ../angsd_out/fst/slidingwindow
 
+#Calculate average fst for each sliding windown analysis:
+cut -f 5 slidingwindow | tail -n +2 | awk '{ sum += $1 } END { print(sum / NR) }'
+#0.540627
+cut -f 6 slidingwindow | tail -n +2 | awk '{ sum += $1 } END { print(sum / NR) }'
+#0.534351
+cut -f 7 slidingwindow | tail -n +2 | awk '{ sum += $1 } END { print(sum / NR) }'
+#0.0423216
+
+
+
 #DONE
