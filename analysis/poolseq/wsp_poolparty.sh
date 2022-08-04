@@ -17,9 +17,10 @@ cut -f 8  pupish_analyze_raw.Sfst  | cut -c 5-20 > LR.MS.fstS.txt
 cut -f 7  pupish_analyze_raw.Sfst | cut -c 5-20 > SC.MS.fstS.txt
 cut -f 6  pupish_analyze_raw.Sfst | cut -c 5-20 > SC.LR.fstS.txt
 
-cut -f 8  pupish_analyze_raw.fet  | cut -c 5-20 > LR.MS.fet.txt
-cut -f 7  pupish_analyze_raw.fet | cut -c 5-20 > SC.MS.fet.txt
-cut -f 6  pupish_analyze_raw.fet | cut -c 5-20 > SC.LR.fet.txt
+awk '{ sum += $1 } END { print(sum / NR) }'  LR.MS.fstS.txt
+awk '{ sum += $1 } END { print(sum / NR) }'  SC.MS.fstS.txt
+awk '{ sum += $1 } END { print(sum / NR) }'  SC.LR.fstS.txt
+   
 
 pupish_analyze_raw <- read.delim("~/analysis/pupish_analyze_raw.fet", header=FALSE)
 colnames(pupish_analyze_raw)<-c("scaf","bp","window","step","cov","LR:MS","SC.MS","SC.LR")
