@@ -7,12 +7,13 @@
 #Use Excel to calculate proportion of heterozygotes from wsp_het.sh, then import file:
 #Set working directory
 setwd("~/Files")
+library(readxl)
 #Import into R
 het_pupfish <- read_excel("het_pupfish.xlsx")
 #Assign factor
 het_pupfish$pop <- factor(het_pupfish$pop , levels=c("MS","SC", "LR"))
 #plot
-ggplot(het_pupfish,aes(x=pop,y=het,fill=pop))+geom_boxplot(show.legend =FALSE)+scale_fill_manual(name="pop", values =c("SC"="black","LR"="black","MS"="darkgrey"))+xlab("")+ylab("Individual Heterozygosity")+theme_classic()
+ggplot(het_pupfish,aes(x=pop,y=het,fill=pop))+geom_boxplot(show.legend =FALSE)+scale_fill_manual(name="pop", values =c("SC"="black","LR"="black","MS"="blue"))+xlab("")+ylab("Individual Heterozygosity")+theme_classic()
 #produce plot
 ggsave("Figure_2.svg")
 
