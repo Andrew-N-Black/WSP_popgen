@@ -12,6 +12,26 @@ library(data.table)
 #Set working directory folder containing all files:
 setwd("~/files/)
 
+#Sites only within pgd exons, using Pool-seq data
+cov<-as.matrix(read.table("~/pool_pgd_exon.cov",header = F))
+axes<-eigen(cov)
+PC1_3<-as.data.frame(axes$vectors[,1:3])
+axes$values/sum(axes$values)*100
+#[1] 71.460787 25.647544  2.891669
+ggplot(PC1_3, aes(x=V1,y=V2,color=ESU, shape=as.factor(pop)))+geom_point(size=5)+scale_shape_manual(title,values=c(20,18,4))+ scale_color_manual(values=c("black", "blue", "black"))+theme(legend.position = "none",panel.grid = element_blank())+theme_classic()+xlab("PC1 (71.4") +ylab("PC2 (25.6%")+geom_hline(yintercept=0,linetype="dashed")+geom_vline(xintercept =0,linetype="dashed")+ggtitle("A")
+ggsave("~/Fig_S1A.svg")
+
+#Sites only within pgd exons, using lcWGR data
+cov<-as.matrix(read.table("~/exon_pgd.cov"))
+axes<-eigen(cov)
+PC1_3<-as.data.frame(axes$vectors[,1:3])
+
+axes$values/sum(axes$values)*100
+#[1] 6.458921e+01 2.475651e+01 4.766153e+00 1.545558e+00 1.086272e+00
+ggplot(data=PC1_3, aes(y=V2, x=V1, shape=as.factor(labels$Population),color=as.factor(labels$ESU)))+geom_point(size=5)+ theme_classic() + xlab("PC1 (64.5%)") +ylab("PC2 (24.5%)")+scale_color_manual(name="", values =c("ESU-1"="black","ESU-2"="blue"))+geom_hline(yintercept=0,linetype="dashed")+geom_vline(xintercept =0,linetype="dashed")+scale_shape_manual("",values=c(20,18,4))+ggtitle("B")
+ggsave("~/Fig_S1B.svg")
+
+
 #Global Depth, all samples together (Fig_S1)
 #Edit Global file by transposing and adding 1:501 row.names
 x<-read.table("ALL_global")
