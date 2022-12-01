@@ -11,13 +11,13 @@ popmap <- read.delim("popmap", header=FALSE)
 #Add col names
 names(popmap)<-c("sample","population","ESU")
 head(popmap)
-#            sample population   ESU
-#1 LR-5017_filt.bam         LR ESU-1
-#2 LR-5018_filt.bam         LR ESU-1
-#3 LR-5019_filt.bam         LR ESU-1
-#4 LR-5020_filt.bam         LR ESU-1
-#5 LR-5021_filt.bam         LR ESU-1
-#6 LR-5146_filt.bam         LR ESU-1
+            sample population   ESU
+1 MS-5310_filt.bam         MS ESU-2
+2 MS-5311_filt.bam         MS ESU-2
+3 MS-5312_filt.bam         MS ESU-2
+4 MS-5313_filt.bam         MS ESU-2
+5 MS-5315_filt.bam         MS ESU-2
+6 MS-5319_filt.bam         MS ESU-2
 
 #Low Coverage Whole Genome Resequencing pca 
 
@@ -34,7 +34,7 @@ axes$values/sum(axes$values)*100
 PC1_3<-as.data.frame(axes$vectors[,1:3])
 title<-"Population"
 
-ggplot(data=PC1_3, aes(y=V2, x=V1, shape=as.factor(popmap$population),color=as.factor(popmap$ESU)))+geom_point(size=5)+ theme_classic() + xlab("PC1 (41.5%)") +ylab("PC2 (3.3%)")+scale_color_manual(name="", values =c("ESU-1"="black","ESU-2"="darkgrey"))+geom_hline(yintercept=0,linetype="dashed")+geom_vline(xintercept =0,linetype="dashed")+scale_shape_manual(title,values=c(20,18,4))
+ggplot(data=PC1_3, aes(y=V2, x=V1, shape=as.factor(popmap$population),color=as.factor(popmap$ESU)))+geom_point(size=5)+ theme_classic() + xlab("PC1 (43.6%)") +ylab("PC2 (3.1%)")+scale_color_manual(name="", values =c("ESU-1"="black","ESU-2"="blue"))+geom_hline(yintercept=0,linetype="dashed")+geom_vline(xintercept =0,linetype="dashed")+scale_shape_manual("",values=c(20,18,4))
 ggsave("Fig_1B.svg")
 
 #DONE
