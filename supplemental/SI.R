@@ -13,12 +13,15 @@ library(data.table)
 setwd("~/files/)
 
 #Sites only within pgd exons, using Pool-seq data
+pop<-c("SC","LR","MS")
+ESU<-c("ESU-1","ESU-1","ESU-2")
 cov<-as.matrix(read.table("~/pool_pgd_exon.cov",header = F))
 axes<-eigen(cov)
 PC1_3<-as.data.frame(axes$vectors[,1:3])
 axes$values/sum(axes$values)*100
 #99.85501550  0.10507703  0.03990747
 ggplot(PC1_3, aes(x=V1,y=V2,color=ESU, shape=as.factor(pop)))+geom_point(size=5)+scale_shape_manual(title,values=c(20,18,4))+ scale_color_manual(values=c("black", "blue", "black"))+theme(legend.position = "none",panel.grid = element_blank())+theme_classic()+xlab("PC1 (71.4") +ylab("PC2 (25.6%")+geom_hline(yintercept=0,linetype="dashed")+geom_vline(xintercept =0,linetype="dashed")+ggtitle("A")
+
 ggsave("~/Fig_S1A.svg")
 
 #Sites only within pgd exons, using lcWGR data
