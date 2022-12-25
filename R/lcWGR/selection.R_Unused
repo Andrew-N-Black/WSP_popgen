@@ -44,3 +44,69 @@ all <- read.csv("~/all.csv")
 summary(-log10(all$P))
      Min.   1st Qu.    Median      Mean   3rd Qu.      Max. 
 0.0000001 0.2217236 0.3847085 0.4602765 0.6143869 1.4622363 
+
+
+#!/bin/sh -l
+#SBATCH -A fnrdewoody
+#SBATCH -N 1
+#SBATCH -n 64
+#SBATCH -t 1-00:00:00
+#SBATCH --job-name=angsd_pca
+#SBATCH -e %x_%j.err
+#SBATCH -o %x_%j.out
+#SBATCH --mem=100GB
+
+
+module load biocontainers
+module load pcangsd
+
+
+#Run PCA
+pcangsd -b FINALC.beagle.gz -o finalc --threads 64 --pcadapt --inbreedSamples --selection
+
+
+
+
+
+
+
+
+####################
+# Run pcadapt scan #
+####################
+#
+#	args[1]: zscores matrix
+#	args[2]: prefix for output files
+#
+
+args = commandArgs(trailingOnly=TRUE)
+
+library(RcppCNPy)
+library(bigutilsr)
+
+zscores <- npyLoad(args[1])
+K <- ncol(zscores)
+
+# For one component only
+if (K == 1) {
+	d2 <- (zscores - median(zscores))^2
+} else {
+	d2 <- dist_ogk(zscores)
+}
+
+write.table(d2, file=paste0(args[2], ".pcadapt.test.txt"), quote=F, row.names=F, col.names=F)
+write.table(pchisq(d2, df=K, lower.tail=F), file=paste0(args[2], ".pcadapt.pval.txt"), quote=F, row.names=F, col.names=F)
+#########################
+Rscript adapt.R finalc.pcadapt.zscores.npy pupfish_all
+
+#Reformat for plotting:
+CHR	BP	SNP	P
+NW_024037781.1	644492	NW_024037781.1-644492	1.22E-08
+NW_024037781.1	659810	NW_024037781.1-659810	1.63E-18
+NW_024037781.1	894303	NW_024037781.1-894303	2.82E-18
+NW_024037781.1	977739	NW_024037781.1-977739	2.95E-10
+NW_024037781.1	984682	NW_024037781.1-984682	6.86E-09
+NW_024037781.1	986463	NW_024037781.1-986463	9.89E-14
+..........
+
+
