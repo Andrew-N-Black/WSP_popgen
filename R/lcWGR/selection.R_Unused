@@ -17,7 +17,9 @@ write.csv(exon_df,"exon.csv")
  library(qqman)
  manhattan(exon, chr="CHR", bp="BP", snp="SNP", p="P" ,ylim=c(0,12),suggestiveline = FALSE)
  
- 
+      Min.   1st Qu.    Median      Mean   3rd Qu.      Max. 
+0.0000046 0.2115752 0.3750263 0.4578099 0.6328643 1.4339744 
+
  
  
  qqchi<-function(x,...){
@@ -38,3 +40,7 @@ all_df<-cbind(p,s,pval)
 write.csv(all_df,"all.csv")
 
 all <- read.csv("~/all.csv")
+
+summary(-log10(all$P))
+     Min.   1st Qu.    Median      Mean   3rd Qu.      Max. 
+0.0000001 0.2217236 0.3847085 0.4602765 0.6143869 1.4622363 
