@@ -6,3 +6,7 @@
  
  #Extract only these sites
  vcftools --vcf all.vcf --positions all.high.sites.txt --recode --keep-INFO-all --out all.high.sites
+ 
+ #To print out each SNP to evaluate deleterious:
+grep "NW_024037791.1$(printf '\t')75071" all.high.sites.recode.vcf | cut -f 10-  | tr "," "\t" | awk '{ for (i=1;i<=NF;i+=7) print $i }' | cut -d ":" -f1
+
