@@ -11,14 +11,33 @@ module load bioinfo
 module load samtools
 module load bedops
 module load vcftools
+module use biocontainers
+module load snpEff/4.3
+module load bedops
+
+#Call variants using bcftools
+bcftools mpileup -f /scratch/bell/blackan/PUPFISH/ref/NCBI/ref_100kb.fa \
+ -b bamlist | bcftools call -mv -Ov -o WSP.vcf
+ 
+#Build custom db
+#snpEff build -c snpEff.config -gff3 -v WSP &> build.logfile.txt
+
+#effect prediction
+snpEff ann -stats -c snpEff.config \
+-no-downstream -no-intergenic -no-intron -no-upstream -no-utr -v \
+WSP WSP.vcf > WSP_eff.vcf
+
+
+# vcf to bed
+vcf2bed < WSP_eff.vcf > WSP_eff.bed 
 
 
 # Remove sites with warnings
 
-grep "WARNING" all_eff.vcf | sed -e '1d' | cut -f1,2 > bad_sites_all.txt
+grep "WARNING" WSP_eff.vcf | sed -e '1d' | cut -f1,2 > bad_sites_all.txt
 
 
-vcftools --vcf all_eff.vcf --recode --recode-INFO-all \
+vcftools --vcf WSP_eff.vcf --recode --recode-INFO-all \
 --stdout --exclude-positions bad_sites_all.txt \
 > all_good_snps.vcf
 
