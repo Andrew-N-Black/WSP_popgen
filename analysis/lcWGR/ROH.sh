@@ -20,3 +20,4 @@ bcftools roh --AF-file PUP.freqs.tab.gz --output ROH_PUP_PLraw.txt --threads 64 
 
 awk '$1=="RG"' ROH_PUP_PLraw.txt > ROH_RG_all.txt
 for i in `cat sample.names`; do  grep $i ROH_RG_all.txt  > $i.ROH.txt ; done
+for i in `ls -1 *ROH.txt`; do python ROHparser.py $i > ${i}_results.txt ; done
