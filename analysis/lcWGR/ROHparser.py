@@ -1,10 +1,10 @@
-    This python script will parse the output ROH file from BCFtools/roh in step5 script
+    This python script will parse the output ROH file from BCFtools/roh
     and calculate ROH and F(ROH) of length >= 100kb and >= 1mb
 
     usage:
     #Set the species name in this python script
-        genus-species = "Panthera-tigris-altaica"
-        accession = "GCF_000464555.1"
+        genus-species = ""
+        accession = ""
     #Note the quotation marks before and after the arguments
 
     #Then in your cluster directory, type in:
