@@ -111,4 +111,4 @@ samtools stats ${line[0]}_filt.bam > ${line[0]}_samtools_stats.txt" > ./jobs/${l
 
 done < ./sample.list
 
-#for i in `ls -1 *sh`; do  echo "sbatch $i" ; done
+#for i in `ls -1 *sh`; do  echo "sbatch $i" ; done > slurmm_jobs ; source ./slurmm_jobs
