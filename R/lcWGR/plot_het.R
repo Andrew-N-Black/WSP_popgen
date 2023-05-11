@@ -9,7 +9,7 @@
 setwd("~/Files")
 library(readxl)
 #Import into R
-het_pupfish <- read_excel("het_pupfish.xlsx")
+het_pupfish <- read_excel("/Users/andrew/Library/CloudStorage/Box-Box/Personal/Postdoc_Purdue/WS_Pupfish/PopulationGenomics/Manuscript/Figures/Files/het_pupfish.xlsx")
 #Assign factor
 het_pupfish$pop <- factor(het_pupfish$pop , levels=c("MS","SC", "LR"))
 #plot
