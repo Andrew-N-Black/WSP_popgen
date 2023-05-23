@@ -25,8 +25,8 @@ ls -1 *.fq.gz | sed "s/_R[1-2]_001_val_[1-2].fq.gz//g" | uniq > sample.list
 mkdir jobs
 
 #Define variables to shorten commands
-REF=/scratch/bell/blackan/PUPFISH/C.tularosa/assembly/ncbi/Danio_rerio/GCF_000002035.6_ref/ref.fa
-DICT=/scratch/bell/blackan/PUPFISH/C.tularosa/assembly/ncbi/Danio_rerio/GCF_000002035.6_ref/ref.dict
+REF=/scratch/bell/blackan/PUPFISH/C.tularosa/assembly/ncbi/Cyprinodon-tularosa/GCF_016077235.1_ref/GCF_016077235.1.fna
+DICT=/scratch/bell/blackan/PUPFISH/C.tularosa/assembly/ncbi/Cyprinodon-tularosa/GCF_016077235.1_ref/GCF_016077235.1.fna.dict
 
 #bwa index $REF
 #samtools faidx $REF
