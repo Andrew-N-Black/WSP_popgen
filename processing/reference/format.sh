@@ -20,13 +20,26 @@ module load bedops
 export PATH=$PATH:~/genmap-build/bin
 
 
+#Download  repeatmasker out
+wget https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/016/077/235/GCF_016077235.1_ASM1607723v1/GCF_016077235.1_ASM1607723v1_rm.out.gz
+
+#Decompress and extract relevant columns
+zcat CF_016077235.1_ASM1607723v1/GCF_016077235.1_ASM1607723v1_rm.out.gz  |tail -n +4|awk '{print $5,$6,$7,$11}'|sed 's/ /\t/g' > repeats.bed 
+
+#Download reference
+wget https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/016/077/235/GCF_016077235.1_ASM1607723v1/GCF_016077235.1_ASM1607723v1_genomic.fna.gz
+#Decompress reference
+gzip GCF_016077235.1_ASM1607723v1_genomic.fna.gz
+#Rename reference
+mv GCF_016077235.1_ASM1607723v1_genomic.fna original.fa
+
 ###prep reference genome for mapping####
 #Reduce fasta header length
-#reformat.sh in=original.fa out=new.fa trd=t -Xmx20g overwrite=T
+reformat.sh in=original.fa out=new.fa trd=t -Xmx20g overwrite=T
 #sort by length
-#sortbyname.sh in=new.fa out=ref.fa -Xmx20g length descending overwrite=T
+sortbyname.sh in=new.fa out=ref.fa -Xmx20g length descending overwrite=T
 #remove sequences smaller that 100kb prior to any repeatmasking
-#bioawk -c fastx '{ if(length($seq) > 100000) { print ">"$name; print $seq }}' ref.fa > ref_100kb.fa
+bioawk -c fastx '{ if(length($seq) > 100000) { print ">"$name; print $seq }}' ref.fa > ref_100kb.fa
 rm new.fa
 
 #index ref.fa and ref_100kb.fa for step3, step4, and step5 
