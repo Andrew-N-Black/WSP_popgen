@@ -5,8 +5,8 @@
 
 library(ggplot)
 #Read in metadata
-setwd("~/Files")
-popmap <- read.delim("popmap", header=FALSE)
+
+popmap <- read.delim("/Users/andrew/Library/CloudStorage/Box-Box/Personal/Postdoc_Purdue/WS_Pupfish/PopulationGenomics/Manuscript/Figures/Files/popmap", header=FALSE)
 
 #Add col names
 names(popmap)<-c("sample","population","ESU")
@@ -22,7 +22,7 @@ head(popmap)
 #Low Coverage Whole Genome Resequencing pca 
 
 #Read in covariation matrix and metadata
-cov<-as.matrix(read.table("FINAL.cov"))
+cov<-as.matrix(read.table("/Users/andrew/Library/CloudStorage/Box-Box/Personal/Postdoc_Purdue/WS_Pupfish/PopulationGenomics/Manuscript/Figures/Files/FINAL.cov"))
 
 #Extract eigenvalues
 axes<-eigen(cov)
