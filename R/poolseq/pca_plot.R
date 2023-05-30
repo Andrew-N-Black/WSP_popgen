@@ -2,7 +2,7 @@
 #R version 4.2.0
 #ggplot2 version 3.3.6 
 
-library(ggplot)
+library(ggplot2)
 library(data.table)
 infile<-fread(file="~/analysis/pupfish.fz", showProgress=FALSE, header=TRUE)
 X<-infile[,c(5:7)]
@@ -22,4 +22,35 @@ gplot(plotting, aes(x=PC1,y=PC2,color=ESU, shape=as.factor(pop)))+geom_point(siz
 
 ggsave("Fig_1A.svg")
 #DONE
+
+#Genic regions only for SC vs MS
+infile<-fread(file="genes.fz", showProgress=FALSE, header=TRUE)
+X<-infile[,c(5:6)]
+colnames(X) <- c("SC","MS")
+pca1<-prcomp(na.omit(X),scale. = TRUE)
+pca.eig= pca1$sdev^2
+ax1 <-round((pca.eig[1] / sum(pca.eig)*100), digits=1)
+ax2 <-round((pca.eig[2] / sum(pca.eig)*100), digits=1)
+ax1 <- paste ("PC1 ","(", ax1,"%",")", sep= "")
+ax2 <- paste ("PC2 ","(", ax2,"%",")", sep= "")
+pop<-c("SC","MS")
+plotting = as.data.frame(pca1$rotation[,1:2])
+ggplot(plotting, aes(x=PC1,y=PC2))+geom_point(size=5,color=c("black","blue"))+theme(legend.position = "none",panel.grid = element_blank())+theme_classic()+xlab(ax1) +ylab(ax2)+ggtitle("Pool-seq")+ggtitle("Genic")
+ggsave("Fig_gene_pool.svg")
+
+#Non-genic regions only for SC vs MS
+infile<-fread(file="inter.fz", showProgress=FALSE, header=TRUE)
+X<-infile[,c(5:6)]
+colnames(X) <- c("SC","MS")
+pca1<-prcomp(na.omit(X),scale. = TRUE)
+pca.eig= pca1$sdev^2
+ax1 <-round((pca.eig[1] / sum(pca.eig)*100), digits=1)
+ax2 <-round((pca.eig[2] / sum(pca.eig)*100), digits=1)
+ax1 <- paste ("PC1 ","(", ax1,"%",")", sep= "")
+ax2 <- paste ("PC2 ","(", ax2,"%",")", sep= "")
+pop<-c("SC","MS")
+plotting = as.data.frame(pca1$rotation[,1:2])
+ggplot(plotting, aes(x=PC1,y=PC2))+geom_point(size=5,color=c("black","blue"))+theme(legend.position = "none",panel.grid = element_blank())+theme_classic()+xlab(ax1) +ylab(ax2)+ggtitle("Pool-seq")+ggtitle("Non-Genic")
+ggsave("Fig_non-genic_pool.svg")
+
 
