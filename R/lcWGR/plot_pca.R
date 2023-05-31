@@ -60,7 +60,7 @@ PC1_3<-as.data.frame(axes$vectors[,1:3])
 title<-"Population"
 
 ggplot(data=PC1_3, aes(y=V2, x=V1, shape=as.factor(popmap$population),color=as.factor(popmap$ESU)))+geom_point(size=5)+ theme_classic() + xlab("PC1 (40.9%)") +ylab("PC2 (3.3%)")+scale_color_manual(name="", values =c("ESU-1"="black","ESU-2"="blue"))+geom_hline(yintercept=0,linetype="dashed")+geom_vline(xintercept =0,linetype="dashed")+scale_shape_manual("",values=c(20,18,4))
-ggsave("Fig_genic.svg")
+ggsave("~/Fig_genic.svg")
 
 #NON-GENIC ONLY
 
