@@ -34,9 +34,9 @@ ax2 <-round((pca.eig[2] / sum(pca.eig)*100), digits=1)
 ax1 <- paste ("PC1 ","(", ax1,"%",")", sep= "")
 ax2 <- paste ("PC2 ","(", ax2,"%",")", sep= "")
 pop<-c("SC","MS")
-plotting = as.data.frame(pca1$rotation[,1:2])
+plotting = as.data.frame(pca1$rotation[,1:3])
 ggplot(plotting, aes(x=PC1,y=PC2))+geom_point(size=5,color=c("black","blue"))+theme(legend.position = "none",panel.grid = element_blank())+theme_classic()+xlab(ax1) +ylab(ax2)+ggtitle("Pool-seq")+ggtitle("Genic")
-ggsave("Fig_gene_pool.svg")
+ggsave("~/Fig_gene_pool.svg")
 
 #Non-genic regions only for SC vs MS
 infile<-fread(file="inter.fz", showProgress=FALSE, header=TRUE)
