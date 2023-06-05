@@ -9,10 +9,10 @@
 module load bioinfo
 module load bcftools
 module load samtools
-#Move to bam folder
 
-#angsd -GL 1 -dobcf 1 -dopost 1 -domajorminor 1 -domaf 1 -minQ 30 -P 64 \
-#-baq 2 -SNP_pval 1e-6 -bam bamlist.txt -ref /scratch/bell/blackan/PUPFISH/C.tularosa/assembly/ncbi/Cyprinodon-tularosa/GCF_016077235.1_ref/ref_100k.fa
+#Run angsd
+angsd -GL 1 -dobcf 1 -dopost 1 -domajorminor 1 -domaf 1 -minQ 30 -P 64 \
+-baq 2 -SNP_pval 1e-6 -bam bamlist.txt -ref /scratch/bell/blackan/PUPFISH/C.tularosa/assembly/ncbi/Cyprinodon-tularosa/GCF_016077235.1_ref/ref_100k.fa
 
 bcftools query -f'%CHROM\t%POS\t%REF,%ALT\t%INFO/AF\n' angsdput.bcf | bgzip -c > PUP.freqs.tab.gz
 tabix -s1 -b2 -e2 PUP.freqs.tab.gz
