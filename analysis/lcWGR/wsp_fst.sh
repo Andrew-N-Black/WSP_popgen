@@ -67,21 +67,77 @@ realSFS fst index ../angsd_out/fst/LR.saf.idx ../angsd_out/fst/SC.saf.idx -sfs .
 realSFS fst stats ../angsd_out/fst/MS.LR.fst.idx 
 realSFS fst stats ../angsd_out/fst/MS.SC.fst.idx 
 realSFS fst stats ../angsd_out/fst/LR.SC.fst.idx 
-realSFS fst stats ../angsd_out/fst/three_pop.fst.idx 
-
-#sliding window analysis among all population samples
-realSFS fst index ../angsd_out/fst/MS.saf.idx ../angsd_out/fst/LR.saf.idx ../angsd_out/fst/SC.saf.idx -sfs ../angsd_out/fst/MS.LR.ml -sfs ../angsd_out/fst/MS.SC.ml -sfs ../angsd_out/fst/LR.SC.ml -fstout ../angsd_out/fst/three_pop -P 126
-
-realSFS fst stats2 ../angsd_out/fst/three_pop.fst.idx -win 50000 -step 10000 -P 126 > ../angsd_out/fst/slidingwindow
-
-#Calculate average fst for each sliding windown analysis:
-cut -f 5 slidingwindow | tail -n +2 | awk '{ sum += $1 } END { print(sum / NR) }'
-#0.540627
-cut -f 6 slidingwindow | tail -n +2 | awk '{ sum += $1 } END { print(sum / NR) }'
-#0.534351
-cut -f 7 slidingwindow | tail -n +2 | awk '{ sum += $1 } END { print(sum / NR) }'
-#0.0423216
 
 
 
-#DONE
+#GENIC FST, bam files filtered based upon genic coordinates first
+
+cd /scratch/bell/blackan/PUPFISH/C.tularosa/popgen/illumina/angsd_out/
+
+#first calculate per pop site allele frequency likelihoods (saf) for each population
+#saf for MP
+#ls ../final_bams/MS*filt.bam > MS_bamlist.txt
+cd /scratch/bell/blackan/PUPFISH/C.tularosa/popgen/illumina/angsd_out/
+
+angsd -P 64 -out /scratch/bell/blackan/PUPFISH/C.tularosa/popgen/illumina/angsd_out/fst/MS \
+-minInd 12 -uniqueOnly 1 -remove_bads 1 -only_proper_pairs 1 -trim 0 -C 50 -baq 1 -minMapQ 30 -minQ 35 \
+-bam ./ms -doCounts 1 -setMinDepth 90 -setMaxDepth 165 -GL 2 -doSaf 1 -anc $REF -ref $REF 
+
+#saf for SC
+#ls ../final_bams/SC*filt.bam > SC_bamlist.txt
+
+angsd -P 64 -out /scratch/bell/blackan/PUPFISH/C.tularosa/popgen/illumina/angsd_out/fst/SC \
+-minInd 12 -uniqueOnly 1 -remove_bads 1 -only_proper_pairs 1 -trim 0 -C 50 -baq 1 -minMapQ 30 -minQ 35 \
+-bam ./sc -doCounts 1 -setMinDepth 90 -setMaxDepth 165 -GL 1 -doSaf 1 -anc $REF -ref $REF \
+-rf genes.bed
+
+#calculate the 1D SFS from allele freq likelihoods
+realSFS fst/MS.saf.idx -P 64 -fold 1 > fst/MS.sfs
+realSFS fst/SC.saf.idx -P 64 -fold 1 > fst/SC.sfs
+
+#calculate the 2D SFS
+realSFS fst/MS.saf.idx fst/SC.saf.idx -P 64 > fst/MS.SC.ml
+
+#Now pairwise Fsts
+
+#Index sample so same sites are analyzed for each pop
+realSFS fst index fst/MS.saf.idx fst/SC.saf.idx -sfs fst/MS.SC.ml -fstout fst/MS.SC -P 64
+
+#Global pairwise estimates
+realSFS fst stats fst/MS.SC.fst.idx
+
+
+#INTERGENIC FST
+#bam files filtered by intergenic regions supplied to angsd below
+
+
+#first calculate per pop site allele frequency likelihoods (saf) for each population
+
+cd /scratch/bell/blackan/PUPFISH/C.tularosa/popgen/illumina/angsd_out/
+
+angsd -P 64 -out /scratch/bell/blackan/PUPFISH/C.tularosa/popgen/illumina/angsd_out/fst/MS \
+-minInd 12 -uniqueOnly 1 -remove_bads 1 -only_proper_pairs 1 -trim 0 -C 50 -baq 1 -minMapQ 30 -minQ 35 \
+-bam ./MS -doCounts 1 -setMinDepth 90 -setMaxDepth 165 -GL 2 -doSaf 1 -anc $REF -ref $REF 
+
+#saf for SC
+#ls ../final_bams/SC*filt.bam > SC_bamlist.txt
+
+angsd -P 64 -out /scratch/bell/blackan/PUPFISH/C.tularosa/popgen/illumina/angsd_out/fst/SC \
+-minInd 12 -uniqueOnly 1 -remove_bads 1 -only_proper_pairs 1 -trim 0 -C 50 -baq 1 -minMapQ 30 -minQ 35 \
+-bam ./SC -doCounts 1 -setMinDepth 90 -setMaxDepth 165 -GL 1 -doSaf 1 -anc $REF -ref $REF \
+-rf genes.bed
+
+#calculate the 1D SFS from allele freq likelihoods
+realSFS fst/MS.saf.idx -P 64 -fold 1 > fst/MS.sfs
+realSFS fst/SC.saf.idx -P 64 -fold 1 > fst/SC.sfs
+
+#calculate the 2D SFS
+realSFS fst/MS.saf.idx fst/SC.saf.idx -P 64 > fst/MS.SC.ml
+
+#Now pairwise Fsts
+
+#Index sample so same sites are analyzed for each pop
+realSFS fst index fst/MS.saf.idx fst/SC.saf.idx -sfs fst/MS.SC.ml -fstout fst/MS.SC -P 64
+
+#Global pairwise estimates
+realSFS fst stats fst/MS.SC.fst.idx
