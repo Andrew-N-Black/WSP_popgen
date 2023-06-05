@@ -20,7 +20,7 @@ bcftools mpileup -f /scratch/bell/blackan/PUPFISH/ref/NCBI/ref_100kb.fa \
  -b bamlist | bcftools call -mv -Ov -o WSP.vcf
  
 #Build custom db
-#snpEff build -c snpEff.config -gff3 -v WSP &> build.logfile.txt
+snpEff build -c snpEff.config -gff3 -v WSP &> build.logfile.txt
 
 #effect prediction
 snpEff ann -stats -c snpEff.config \
