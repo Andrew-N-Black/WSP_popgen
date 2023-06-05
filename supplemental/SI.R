@@ -2,7 +2,7 @@
 # 1) Global coverage for all samples
 # 2) Individual coverage, factored by population
 # 3) Phred score distribution
-# 4) Intergenic / exonic admixture and PCAs
+# 4) Intergenic / genic admixture PCAs
 
 library(ggplot2)
 library(reshape2)
@@ -10,14 +10,15 @@ library(plyr)
 library(data.table)
 
 #Set working directory folder containing all files:
-setwd("~/files/)
+setwd("Library/CloudStorage/Box-Box/Personal/Postdoc_Purdue/WS_Pupfish/PopulationGenomics/Manuscript/Figures/Files/")
+
 
 
 #Global Depth, all samples together (Fig_S1)
 #Edit Global file by transposing and adding 1:501 row.names
 x<-read.table("ALL_global")
 ggplot(data=x,aes(x=V1,y=V2))+geom_bar(stat="identity")+theme_classic()+xlab("Global Depth")+ylab("Sites")
-ggsave("S1.svg")
+ggsave("Fig_S1.svg")
 
 
 #Sample Depth, population origin factor (Fig_S2)
@@ -38,29 +39,11 @@ phred<-read.table("ALL.qa.gs")
 ggplot(phred, aes(x=qscore,y=counts)) + geom_bar(stat="identity")+theme_classic()+ scale_x_discrete(name ="Phred score",limits=c(13:37))+ylab("Number of bases") + geom_vline(xintercept = 30,linetype="dashed")
 ggsave("Fig_S3.svg")
 
-#Intergenic / exonic admixture and PCAs. Six panel plot (Fig_S4)
-#Read in Q table for K2 and K3, based upon intergenic sites only:
-k2<-readQ("INTER_K2.qopt")
-k3<-readQ("INTER_K3.qopt")
-#Combine the two Q tables
-all_K<-joinQ(k2,k3)
-#Plot
-plotQ(qlist=all_K,imgoutput = "join",returnplot=T,exportplot=F,basesize=11,showindlab=T, clustercol=c("black","grey","slateblue"))
-#Save
-ggsave("Fig_S3a.svg")   
+#Intergenic / genic PCA. Six panel plot (Fig_S4)
 
-#Read in Q table for K2 and K3, based upon exonic sites only:
-k2<-readQ("EXON_K2.qopt")
-k3<-readQ("EXON_K3.qopt")
-#Combine the two Q tables
-all_K<-joinQ(k2,k3)
-#Plot
-plotQ(qlist=all_K,imgoutput = "join",returnplot=T,exportplot=F,basesize=11,showindlab=T, clustercol=c("black","grey","slateblue"))
-#Save
-ggsave("Fig_S4b.svg")  
 
-#Pool-seq PCA-Exon sites only
-infile<-fread(file="exon.fz", showProgress=FALSE, header=TRUE)
+#Pool-seq PCA-genic sites only
+infile<-fread(file="genic.fz", showProgress=FALSE, header=TRUE)
 infile$Chr=NULL
 infile$Pos=NULL
 infile$Ref=NULL
@@ -104,7 +87,7 @@ ggplot(plotting, aes(x=PC1,y=PC2,color=esu, shape=as.factor(pop)))+geom_point(si
 #Save
 ggsave("Fig_S4d.svg") 
 
-#lcWGR PCA of Exon sites only
+#lcWGR PCA of genic sites only
 cov<-as.matrix(read.table("EXON.cov"))
 popmap <- read.delim("~/popmap", header=FALSE)
 x<-eigen(cov)
