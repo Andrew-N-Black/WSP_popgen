@@ -39,8 +39,10 @@ phred<-read.table("ALL.qa.gs")
 ggplot(phred, aes(x=qscore,y=counts)) + geom_bar(stat="identity")+theme_classic()+ scale_x_discrete(name ="Phred score",limits=c(13:37))+ylab("Number of bases") + geom_vline(xintercept = 30,linetype="dashed")
 ggsave("Fig_S3.svg")
 
-#Intergenic / genic PCA. Six panel plot (Fig_S4)
+#Genetic load plot (Fig_S4)
+#See R/load.R
 
+#Non-genic / genic PCA. Six panel plot (Fig_S5)
 
 #Pool-seq PCA-genic sites only
 infile<-fread(file="genic.fz", showProgress=FALSE, header=TRUE)
@@ -61,11 +63,10 @@ pop<-c("SC","LR","MS")
 esu<-c("ESU-2","ESU-2","ESU-1")
 plotting<-as.data.frame(pca1$rotation)
 ggplot(plotting, aes(x=PC1,y=PC2,color=esu, shape=as.factor(pop)))+geom_point(size=5)+scale_shape_manual(title,values=c(20,18,4))+ scale_color_manual(values=c("black", "darkgrey", "black"))+theme(legend.position = "none",panel.grid = element_blank())+theme_classic()+xlab(ax1) +ylab(ax2)+ylim(c(0,1))+geom_hline(yintercept=0,linetype="dashed")+geom_vline(xintercept =0,linetype="dashed")
-#Save
-ggsave("Fig_S4c.svg")  
 
 
-#Pool-seq PCA-Intergenic sites only
+
+#Pool-seq PCA-non-genic sites only
 infile<-fread(file="inter.fz", showProgress=FALSE, header=TRUE)
 infile$Chr=NULL
 infile$Pos=NULL
@@ -84,48 +85,48 @@ pop<-c("SC","LR","MS")
 esu<-c("ESU-2","ESU-2","ESU-1")
 plotting<-as.data.frame(pca1$rotation)
 ggplot(plotting, aes(x=PC1,y=PC2,color=esu, shape=as.factor(pop)))+geom_point(size=5)+scale_shape_manual(title,values=c(20,18,4))+ scale_color_manual(values=c("black", "darkgrey", "black"))+theme(legend.position = "none",panel.grid = element_blank())+theme_classic()+xlab(ax1) +ylab(ax2)+ylim(c(0,1))+geom_hline(yintercept=0,linetype="dashed")+geom_vline(xintercept =0,linetype="dashed")
-#Save
-ggsave("Fig_S4d.svg") 
+
 
 #lcWGR PCA of genic sites only
-cov<-as.matrix(read.table("EXON.cov"))
+cov<-as.matrix(read.table("genic.cov"))
 popmap <- read.delim("~/popmap", header=FALSE)
 x<-eigen(cov)
 x$values/sum(x$values)
 PC1_3<-as.data.frame(x$vectors[,1:3])
 title<-"Population"
-ggplot(data=PC1_3, aes(y=V2, x=V1, shape=as.factor(popmap$V2),color=as.factor(popmap$V3)))+ geom_point(size=5)+ theme_classic() + xlab("PC1 (38.6%)") +ylab("PC2 (3.2%)")+scale_color_manual(name="", values =c("ESU-1"="black","ESU-2"="darkgrey"))+geom_hline(yintercept=0,linetype="dashed")+geom_vline(xintercept =0,linetype="dashed")+scale_shape_manual(title,values=c(20,18,4))
-ggsave("Fig_S4e.svg") 
+ggplot(data=PC1_3, aes(y=V2, x=V1, shape=as.factor(popmap$V2),color=as.factor(popmap$V3)))+ geom_point(size=5)+ theme_classic() + xlab("PC1 (40.9%)") +ylab("PC2 (3.3%)")+scale_color_manual(name="", values =c("ESU-1"="black","ESU-2"="darkgrey"))+geom_hline(yintercept=0,linetype="dashed")+geom_vline(xintercept =0,linetype="dashed")+scale_shape_manual(title,values=c(20,18,4))
+
 
 #lcWGR PCA of Intergenic sites only
-cov<-as.matrix(read.table("EXON.cov"))
+cov<-as.matrix(read.table("inter.cov"))
 popmap <- read.delim("~/popmap", header=FALSE)
 x<-eigen(cov)
 x$values/sum(x$values)
 PC1_3<-as.data.frame(x$vectors[,1:3])
 title<-"Population"
-ggplot(data=PC1_3, aes(y=V2, x=V1, shape=as.factor(popmap$V2),color=as.factor(popmap$V3)))+ geom_point(size=5)+ theme_classic() + xlab("PC1 (38.6%)") +ylab("PC2 (3.2%)")+scale_color_manual(name="", values =c("ESU-1"="black","ESU-2"="darkgrey"))+geom_hline(yintercept=0,linetype="dashed")+geom_vline(xintercept =0,linetype="dashed")+scale_shape_manual(title,values=c(20,18,4))
-ggsave("Fig_S4f.svg") 
+ggplot(data=PC1_3, aes(y=V2, x=V1, shape=as.factor(popmap$V2),color=as.factor(popmap$V3)))+ geom_point(size=5)+ theme_classic() + xlab("PC1 (40.2%)") +ylab("PC2 (3.2%)")+scale_color_manual(name="", values =c("ESU-1"="black","ESU-2"="darkgrey"))+geom_hline(yintercept=0,linetype="dashed")+geom_vline(xintercept =0,linetype="dashed")+scale_shape_manual(title,values=c(20,18,4))
+ 
+#ML tree of 11 Cyprinodon species (Fig_S6)
+#See /analysis/lcWGR/mtDNA_workflow.R
 
-#Sites only within pgd, using Pool-seq data
+
+#Sites only within pgd, using Pool-seq data (Fig_S7)
 pop<-c("SC","LR","MS")
 ESU<-c("ESU-1","ESU-1","ESU-2")
-cov<-as.matrix(read.table("~/PGD_pool.cov",header = F))
+cov<-as.matrix(read.table("PGD_pool.cov",header = F))
 axes<-eigen(cov)
 PC1_3<-as.data.frame(axes$vectors[,1:3])
 axes$values/sum(axes$values)*100
 #[1] 55.9178253 43.5840862  0.4980885
 ggplot(PC1_3, aes(x=V1,y=V2,color=ESU, shape=as.factor(pop)))+geom_point(size=5)+scale_shape_manual(title,values=c(20,18,4))+ scale_color_manual(values=c("black", "blue", "black"))+theme(legend.position = "none",panel.grid = element_blank())+theme_classic()+xlab("PC1 (55.9%)") +ylab("PC2 (43.5%)")+geom_hline(yintercept=0,linetype="dashed")+geom_vline(xintercept =0,linetype="dashed")+ggtitle("A")
 
-ggsave("~/Fig_S5A.svg")
-
 #Sites only within pgd , using lcWGR data
-cov<-as.matrix(read.table("~/PGD.cov"))
+cov<-as.matrix(read.table("PGD.cov"))
 axes<-eigen(cov)
 PC1_3<-as.data.frame(axes$vectors[,1:3])
 
 axes$values/sum(axes$values)*100
 #[1] 5.137600e+01 2.889389e+01 7.748587e+00 3.944816e+00 3.687274e+00
 ggplot(data=PC1_3, aes(y=V2, x=V1, shape=as.factor(labels$Population),color=as.factor(labels$ESU)))+geom_hline(yintercept=0,linetype="dashed")+geom_vline(xintercept =0,linetype="dashed")+scale_shape_manual("",values=c(20,18,4))+geom_point(size=5)+ theme_classic() + xlab("PC1 (51.4%)") +ylab("PC2 (28.9%)")+scale_color_manual(name="", values =c("ESU-1"="black","ESU-2"="blue"))
-ggsave("~/Fig_S5B.svg")
 
+# (Fig_S8-S9) Add Erangi's new figures
