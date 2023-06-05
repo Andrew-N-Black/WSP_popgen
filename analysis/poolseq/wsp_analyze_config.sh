@@ -1,21 +1,22 @@
 #!/bin/bash
 #PPanalyze configuration file
-pupfish_poly_all.txt
+ analyze_ESU.config
+
 #Populations for analysis#
 POPS=1,2,3
 
 #Input files and names#
-PREFIX=pupish_analyze
-COVFILE=/scratch/bell/blackan/PUPFISH/C.tularosa/popgen/poolseq/final/filters/pupfish_coverage.txt
-SYNC=/scratch/bell/blackan/PUPFISH/C.tularosa/popgen/poolseq/final/pupfish.sync
-FZFILE=/scratch/bell/blackan/PUPFISH/C.tularosa/popgen/poolseq/final/pupfish.fz
-BLACKLIST=/scratch/bell/blackan/PUPFISH/C.tularosa/popgen/poolseq/final/filters/pupfish_poly_all.txt
-OUTDIR=/scratch/bell/blackan/PUPFISH/C.tularosa/popgen/poolseq/final/analysis
+PREFIX=three.pops.10
+COVFILE=/scratch/bell/blackan/PUPFISH/C.tularosa/popgen/poolseq/OKAY/filters/OK_coverage.txt
+SYNC=/scratch/bell/blackan/PUPFISH/C.tularosa/popgen/poolseq/OKAY/OK.sync
+FZFILE=/scratch/bell/blackan/PUPFISH/C.tularosa/popgen/poolseq/OKAY/OK.fz
+BLACKLIST=/scratch/bell/blackan/PUPFISH/C.tularosa/popgen/poolseq/OKAY/filters/OK_poly_all.txt
+OUTDIR=/scratch/bell/blackan/PUPFISH/C.tularosa/popgen/poolseq/OKAY
 
 #Types of Analyses#
 FST=on
 SLIDINGFST=on
-FET=on
+FET=off
 NJTREE=off
 
 #Global Parameters#
@@ -25,8 +26,8 @@ MAF=0.05
 
 #FST Parameters#
 FSTTYPE=traditional
-WINDOW=50000
-STEP=10000
+WINDOW=25000
+STEP=12500
 NIND=30
 
 #NJ Tree Parameters
@@ -42,3 +43,4 @@ POOL2=/group/bioinfo/apps/apps/popoolation2_1201
 	#bash/shell
 	#perl
 	#R
+
