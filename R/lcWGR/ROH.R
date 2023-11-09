@@ -2,7 +2,6 @@
 library(ggplot2)
 library(readxl)
 library(reshape2)
-setwd("Library/CloudStorage/Box-Box/Personal/Postdoc_Purdue/WS_Pupfish/PopulationGenomics/Manuscript/Figures/Files/")
 
 #Load excel file listing fROH values
 ind_rohs <- read_excel("ind_rohs.xlsx")
