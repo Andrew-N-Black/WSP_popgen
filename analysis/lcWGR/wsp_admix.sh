@@ -19,8 +19,8 @@ do
 	do
                  /depot/fnrdewoody/apps/angsd/misc/NGSadmix -P 64  \
                 -K ${i} -minMaf 0.05 -maxiter 50000 -tol 1e-9 -tolLike50 1e-9 \
-                -likes /scratch/bell/blackan/PUPFISH/C.tularosa/popgen/illumina/angsd_out/FINAL.beagle.gz \
-                -outfiles  /scratch/bell/blackan/PUPFISH/C.tularosa/popgen/illumina/angsd_out/ADX/R${j}/FINAL_K${i}
+                -likes FINAL.beagle.gz \
+                -outfiles  ADX/R${j}/FINAL_K${i}
                 i=$[$i+1]
 
 	done
