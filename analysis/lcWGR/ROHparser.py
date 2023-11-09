@@ -23,12 +23,12 @@ print("The species names is " + genus_species)
 Do not edit below this line
 -------------------------------------------------------------------------------------------------"""
 #Set working directory and designate input file
-path_to_directory = "/scratch/bell/blackan/PUPFISH/C.tularosa/popgen/illumina/angsd_out/"
+path_to_directory = "enter path"
 
 #Estimate ROH based on "PL"
 roh_input = path_to_directory  + genus_species 
 roh_output = path_to_directory + genus_species + "_PL.txt"
-ref_index_file = "/scratch/bell/blackan/PUPFISH/C.tularosa/assembly/ncbi/Cyprinodon-tularosa/GCF_016077235.1_ref/ref.fa.fai"
+ref_index_file = "ref.fa.fai"
 
 #Calculate the length of the reference genome
 #If we use autosomal genome length to calculate ROH later, len_ref should be changed to len_autosome
