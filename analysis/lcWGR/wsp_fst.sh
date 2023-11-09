@@ -11,10 +11,10 @@
 module load biocontainers
 module load angsd/0.935
 
-REF=/scratch/bell/blackan/PUPFISH/C.tularosa/assembly/ncbi/Cyprinodon-tularosa/GCF_016077235.1_ref/GCF_016077235.1.fna
+REF=GCF_016077235.1_ref/GCF_016077235.1.fna
 
 #Angsd need the reference to be indexed first
-#samtools faidx scratch/bell/blackan/PUPFISH/C.tularosa/assembly/ncbi/GCF_016077235.1_ASM1607723v1_genomic.fna
+#samtools faidx GCF_016077235.1_ASM1607723v1_genomic.fna
 
 
 # index file
@@ -24,7 +24,7 @@ angsd sites index ./FINAL.SITES
 #saf for MP
 #ls ../final_bams/MS*filt.bam > MS_bamlist.txt
 
-angsd -P 126 -out /scratch/bell/blackan/PUPFISH/C.tularosa/popgen/illumina/angsd_out/fst/MS \
+angsd -P 126 -out fst/MS \
 -minInd 12 -uniqueOnly 1 -remove_bads 1 -only_proper_pairs 1 -trim 0 -C 50 -baq 1 -minMapQ 30 -minQ 35 \
 -bam ./MS_bamlist.txt -doCounts 1 -setMinDepth 90 -setMaxDepth 165 -GL 2 -doSaf 1 -anc $REF -ref $REF \
 -sites FINAL.SITES
@@ -32,7 +32,7 @@ angsd -P 126 -out /scratch/bell/blackan/PUPFISH/C.tularosa/popgen/illumina/angsd
 #saf for LR
 #ls ../final_bams/LR*filt.bam > LR_bamlist.txt
 
-angsd -P 126 -out /scratch/bell/blackan/PUPFISH/C.tularosa/popgen/illumina/angsd_out/fst/LR \
+angsd -P 126 -out fst/LR \
 -minInd 12 -uniqueOnly 1 -remove_bads 1 -only_proper_pairs 1 -trim 0 -C 50 -baq 1 -minMapQ 30 -minQ 35 \
 -bam ./LR_bamlist.txt -doCounts 1 -setMinDepth 90 -setMaxDepth 165 -GL 1 -doSaf 1 -anc $REF -ref $REF \
 -sites FINAL.SITES
@@ -41,7 +41,7 @@ angsd -P 126 -out /scratch/bell/blackan/PUPFISH/C.tularosa/popgen/illumina/angsd
 #saf for SC
 #ls ../final_bams/SC*filt.bam > SC_bamlist.txt
 
-angsd -P 126 -out /scratch/bell/blackan/PUPFISH/C.tularosa/popgen/illumina/angsd_out/fst/SC \
+angsd -P 126 -out fst/SC \
 -minInd 12 -uniqueOnly 1 -remove_bads 1 -only_proper_pairs 1 -trim 0 -C 50 -baq 1 -minMapQ 30 -minQ 35 \
 -bam ./SC_bamlist.txt -doCounts 1 -setMinDepth 90 -setMaxDepth 165 -GL 1 -doSaf 1 -anc $REF -ref $REF \
 -sites FINAL.SITES
@@ -72,21 +72,19 @@ realSFS fst stats ../angsd_out/fst/LR.SC.fst.idx
 
 #GENIC FST, bam files filtered based upon genic coordinates first
 
-cd /scratch/bell/blackan/PUPFISH/C.tularosa/popgen/illumina/angsd_out/
-
 #first calculate per pop site allele frequency likelihoods (saf) for each population
 #saf for MP
 #ls ../final_bams/MS*filt.bam > MS_bamlist.txt
-cd /scratch/bell/blackan/PUPFISH/C.tularosa/popgen/illumina/angsd_out/
+cd angsd_out/
 
-angsd -P 64 -out /scratch/bell/blackan/PUPFISH/C.tularosa/popgen/illumina/angsd_out/fst/MS \
+angsd -P 64 -out fst/MS \
 -minInd 12 -uniqueOnly 1 -remove_bads 1 -only_proper_pairs 1 -trim 0 -C 50 -baq 1 -minMapQ 30 -minQ 35 \
 -bam ./ms -doCounts 1 -setMinDepth 90 -setMaxDepth 165 -GL 2 -doSaf 1 -anc $REF -ref $REF 
 
 #saf for SC
 #ls ../final_bams/SC*filt.bam > SC_bamlist.txt
 
-angsd -P 64 -out /scratch/bell/blackan/PUPFISH/C.tularosa/popgen/illumina/angsd_out/fst/SC \
+angsd -P 64 -out fst/SC \
 -minInd 12 -uniqueOnly 1 -remove_bads 1 -only_proper_pairs 1 -trim 0 -C 50 -baq 1 -minMapQ 30 -minQ 35 \
 -bam ./sc -doCounts 1 -setMinDepth 90 -setMaxDepth 165 -GL 1 -doSaf 1 -anc $REF -ref $REF \
 -rf genes.bed
@@ -115,14 +113,14 @@ realSFS fst stats fst/MS.SC.fst.idx
 
 cd /scratch/bell/blackan/PUPFISH/C.tularosa/popgen/illumina/angsd_out/
 
-angsd -P 64 -out /scratch/bell/blackan/PUPFISH/C.tularosa/popgen/illumina/angsd_out/fst/MS \
+angsd -P 64 -out fst/MS \
 -minInd 12 -uniqueOnly 1 -remove_bads 1 -only_proper_pairs 1 -trim 0 -C 50 -baq 1 -minMapQ 30 -minQ 35 \
 -bam ./MS -doCounts 1 -setMinDepth 90 -setMaxDepth 165 -GL 2 -doSaf 1 -anc $REF -ref $REF 
 
 #saf for SC
 #ls ../final_bams/SC*filt.bam > SC_bamlist.txt
 
-angsd -P 64 -out /scratch/bell/blackan/PUPFISH/C.tularosa/popgen/illumina/angsd_out/fst/SC \
+angsd -P 64 -out fst/SC \
 -minInd 12 -uniqueOnly 1 -remove_bads 1 -only_proper_pairs 1 -trim 0 -C 50 -baq 1 -minMapQ 30 -minQ 35 \
 -bam ./SC -doCounts 1 -setMinDepth 90 -setMaxDepth 165 -GL 1 -doSaf 1 -anc $REF -ref $REF \
 -rf genes.bed
