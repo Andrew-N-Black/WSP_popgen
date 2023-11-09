@@ -13,19 +13,19 @@ module load biocontainers
 module load pcangsd
 
 
-REF=/scratch/bell/blackan/PUPFISH/C.tularosa/assembly/ncbi/Cyprinodon-tularosa/GCF_016077235.1_ref/ref.fa
+REF=ref_100kb.fa
 
 
 #Run PCA
-pcangsd -b /scratch/bell/blackan/PUPFISH/C.tularosa/popgen/illumina/angsd_out/FINAL.beagle.gz --selection --tree \
--o /scratch/bell/blackan/PUPFISH/C.tularosa/popgen/illumina/angsd_out/pca/FINAL --threads 50 --pcadapt --inbreedSamples
+pcangsd -b FINAL.beagle.gz --selection --tree \
+-o FINAL --threads 50 --pcadapt --inbreedSamples
 
-pcangsd -b /scratch/bell/blackan/PUPFISH/C.tularosa/popgen/illumina/angsd_out/EXON.beagle.gz --selection --tree \
--o /scratch/bell/blackan/PUPFISH/C.tularosa/popgen/illumina/angsd_out/pca/FINAL --threads 50 --pcadapt --inbreedSamples
+pcangsd -b EXON.beagle.gz --selection --tree \
+-o FINAL/ --threads 50 --pcadapt --inbreedSamples
 
 
-pcangsd -b /scratch/bell/blackan/PUPFISH/C.tularosa/popgen/illumina/angsd_out/INTER.beagle.gz --selection --tree \
--o /scratch/bell/blackan/PUPFISH/C.tularosa/popgen/illumina/angsd_out/pca/FINAL --threads 50 --pcadapt --inbreedSamples
+pcangsd -b INTER.beagle.gz --selection --tree \
+-o FINAL/ --threads 50 --pcadapt --inbreedSamples
 
 
 #DONE
