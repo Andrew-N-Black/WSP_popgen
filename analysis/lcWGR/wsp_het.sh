@@ -12,8 +12,8 @@ ml angsd
 
 
 #Path to parent directory of genus-species
-PD=/scratch/bell/blackan/PUPFISH/C.tularosa/popgen/illumina/angsd_out/
-REF=/scratch/bell/blackan/PUPFISH/C.tularosa/assembly/ncbi/Cyprinodon-tularosa/GCF_016077235.1_ref/GCF_016077235.1.fna
+PD=angsd_out/
+REF=GCF_016077235.1.fna
 
 cd $PD
 
