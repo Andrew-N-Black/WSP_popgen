@@ -2,8 +2,6 @@
 #R version 4.2.0
 #pophelper v.2.3.1
 library(pophelper)
-setwd("Library/CloudStorage/Box-Box/Personal/Postdoc_Purdue/WS_Pupfish/PopulationGenomics/Manuscript/Figures/Files/")
-
 #load in file listing attribute data
 labels <- read_excel("labels.xlsx")
 #Extract relevant columns
