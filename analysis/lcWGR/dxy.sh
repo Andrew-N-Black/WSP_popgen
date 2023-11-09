@@ -24,15 +24,15 @@ angsd sites index ./Dxy/sites_maf.txt
 
 #For MS population
 angsd -bam ./bam_MS.list -doMaf 1 -minInd 12 -skipTriallelic 1 -minMapQ 30 -minQ 35 -doMajorMinor 1 -GL 1 -out ./Dxy/MS \
- -sites ./Dxy/sites_maf.txt -ref /scratch/bell/eheenken/projects/current_pupfish/ref/GCF_016077235.1_ASM1607723v1_genomic.fna
+ -sites ./Dxy/sites_maf.txt -ref GCF_016077235.1_ASM1607723v1_genomic.fna
 
 #For SC population
 angsd -bam ./bam_SC.list -doMaf 1 -minInd 12 -skipTriallelic 1 -minMapQ 30 -minQ 35 -doMajorMinor 1 -GL 1 -out ./Dxy/SC \
- -sites ./Dxy/sites_maf.txt -ref /scratch/bell/eheenken/projects/current_pupfish/ref/GCF_016077235.1_ASM1607723v1_genomic.fna
+ -sites ./Dxy/sites_maf.txt -ref GCF_016077235.1_ASM1607723v1_genomic.fna
 
 #For LR population
 angsd -bam ./bam_LR.list -doMaf 1 -minInd 12 -skipTriallelic 1 -minMapQ 30 -minQ 35 -doMajorMinor 1 -GL 1 -out ./Dxy/LR \
- -sites ./Dxy/sites_maf.txt -ref /scratch/bell/eheenken/projects/current_pupfish/ref/GCF_016077235.1_ASM1607723v1_genomic.fna
+ -sites ./Dxy/sites_maf.txt -ref GCF_016077235.1_ASM1607723v1_genomic.fna
 
 ####Then ran Rscript from https://github.com/mfumagalli/ngsPopGen/blob/master/scripts/calcDxy.R to get the Dxy between populations
 
