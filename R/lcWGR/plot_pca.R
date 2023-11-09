@@ -2,8 +2,6 @@
 #R version 4.2.0
 #ggplot2 version 3.3.6
 
-setwd("/Users/andrew/Library/CloudStorage/Box-Box/Personal/Postdoc_Purdue/WS_Pupfish/PopulationGenomics/Manuscript/Figures/Files/")
-
 library(ggplot)
 #Read in metadata
 
