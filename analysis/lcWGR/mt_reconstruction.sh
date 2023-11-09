@@ -64,10 +64,10 @@ done < ./sample.list
 
 cd $SLURM_SUBMIT_DIR
 
-cd /scratch/bell/eheenken/new/projects/Pupfish/C.tularosa/popgen/illumina/cleaned/samples/jobs
+cd /samples/jobs
 for prefix in $(ls *.sh | sed -r 's/_pup_mt[.]sh//' | uniq)
 do
- cd /scratch/bell/eheenken/new/projects/Pupfish/C.tularosa/popgen/illumina/cleaned/samples/jobs/errors/
-sbatch /scratch/bell/eheenken/new/projects/Pupfish/C.tularosa/popgen/illumina/cleaned/samples/jobs/${prefix}_pup_mt.sh
+ cd /jobs/errors/
+sbatch /jobs/${prefix}_pup_mt.sh
 done
 
