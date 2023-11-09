@@ -4,7 +4,6 @@
 
 library(ggplot2)
 library(data.table)
-setwd("Library/CloudStorage/Box-Box/Personal/Postdoc_Purdue/WS_Pupfish/PopulationGenomics/Manuscript/Figures/Files/")
 
 infile<-fread(file="pupfish.fz", showProgress=FALSE, header=TRUE)
 X<-infile[,c(5:7)]
