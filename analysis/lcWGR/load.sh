@@ -16,7 +16,7 @@ module load snpEff/4.3
 module load bedops
 
 #Call variants using bcftools
-bcftools mpileup -f /scratch/bell/blackan/PUPFISH/ref/NCBI/ref_100kb.fa \
+bcftools mpileup -f ref_100kb.fa \
  -b bamlist | bcftools call -mv -Ov -o WSP.vcf
  
 #Build custom db
@@ -103,9 +103,6 @@ done
 cd ind_geno
 pr -mts' ' all_*_high.geno > all_high_allind_allele
  
- 
- #Move to the ALL directory
- /scratch/bell/blackan/PUPFISH/C.tularosa/popgen/illumina/angsd_out/LOAD/ALL
  
  #Concatenate all high sites for the three populations
  cat ../MS/ms_high_sites.txt ../SC/sc_high_sites.txt ../LR/lr_high_sites.txt > all.high.sites.txt
