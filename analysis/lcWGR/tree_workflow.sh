@@ -20,9 +20,9 @@ module load iqtree/2.1.2
 
 #Generate a vcf file for all samples
 
-cd /scratch/bell/eheenken/projects/current_pupfish/final_bams
-bcftools mpileup -f /scratch/bell/eheenken/projects/current_pupfish/ref/GCF_016077235.1_ASM1607723v1_genomic.fna \
- -b bam.list | bcftools call -mv -Ov -o /scratch/bell/eheenken/projects/current_pupfish/wgs_tree/vcf_with_var
+cd final_bams
+bcftools mpileup -f GCF_016077235.1_ASM1607723v1_genomic.fna \
+ -b bam.list | bcftools call -mv -Ov -o vcf_with_var
 
 cd /scratch/bell/eheenken/projects/current_pupfish/wgs_tree
 
@@ -30,13 +30,13 @@ cd /scratch/bell/eheenken/projects/current_pupfish/wgs_tree
 vk phylo fasta vcf_with_var
 
 ##tree generation -maximum likelihood tree with 1000 boostraps 
-cd /scratch/bell/eheenken/projects/current_pupfish/wgs_tree
+cd wgs_tree
 iqtree -s vcf_kit_tree.o -B 1000 -alrt 1000 -T 64
 
 ##mt tree
 
 #mitogenomes were first aligned using clustalX 2.1  
 #the generated final_alignment_file.fasta was used to create maximumlikelihood tree with 1000 boostraps
-cd /scratch/bell/eheenken/projects/current_pupfish/mt_tree
+cd mt_tree
 iqtree -s final_alignment_file.fasta -B 1000 -alrt 1000 -T 64
 
