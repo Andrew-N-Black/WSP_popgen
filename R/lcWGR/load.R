@@ -2,7 +2,6 @@
 library(ggplot2)
 library(reshape2)
 library(readxl)
-setwd("Library/CloudStorage/Box-Box/Personal/Postdoc_Purdue/WS_Pupfish/PopulationGenomics/Manuscript/Figures/Files/")
 
 #Read in excel file
 load <- read_excel("load.xlsx")
