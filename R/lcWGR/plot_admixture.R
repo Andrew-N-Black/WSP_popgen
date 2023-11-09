@@ -10,10 +10,12 @@ labels <- read_excel("labels.xlsx")
 both <- as.data.frame(labels[,c(3,2)])
 
 #plot K2
-plotQ(qlist=k2,returnplot=T,exportplot=F,basesize=11,showindlab=F, clustercol=c("black","darkgrey"))
+k2<-readQ("K2.Q")
+plotQ(qlist=k2,returnplot=T,exportplot=F,basesize=11,showindlab=F, clustercol=c("blue","black"))
 
 #plot K3
-plotQ(qlist=k3,returnplot=T,exportplot=F,basesize=11,showindlab=F, clustercol=c("slateblue","black","darkgrey"))
+k3<-readQ("K3.Q")
+plotQ(qlist=k3,returnplot=T,exportplot=F,basesize=11,showindlab=F, clustercol=c("blue","black","goldenrod"))
 
 
 #Done
