@@ -18,25 +18,31 @@ module load iqtree/2.1.2
 
 ##WGR tree
 
-#Generate a vcf file for all samples
+#Generate a vcf file for all 45 WGR C.tularosa samples and C.variegatus from genotype likelihood
 
 cd final_bams
-bcftools mpileup -f GCF_016077235.1_ASM1607723v1_genomic.fna \
- -b bam.list | bcftools call -mv -Ov -o vcf_with_var
 
+angsd -GL 2 -out /scratch/bell/eheenken/projects/current_pupfish/wgs_tree \
+ -sites ./FINAL.SITES -P 64 -bam bam.list -doGlf 2 -doMajorMinor 1 -doMaf 1 \
+ -ref /scratch/bell/eheenken/projects/current_pupfish/ref/GCF_016077235.1_ASM1607723v1_genomic.fna \
+ -doBcf 1 -doPost 1 -docounts 1 -dogeno 5
+ 
 cd /scratch/bell/eheenken/projects/current_pupfish/wgs_tree
 
-#Generate fasta-alignment from variant calls
-vk phylo fasta vcf_with_var
+#Generate fasta-alignment from variant calls -this step concatenate all single-nucleotide variants from the VCF for each sample.
+#The resulting sequence alignment file (vcf_kit_tree.o) contained a total of 215,846 sites and is the input for IQ-TREE 
+
+vk phylo fasta pup.species.vcf
+
 
 ##tree generation -maximum likelihood tree with 1000 boostraps 
-cd wgs_tree
-iqtree -s vcf_kit_tree.o -B 1000 -alrt 1000 -T 64
+
+iqtree -s vcf_kit_tree.o -B 1000 -alrt 1000 -m GTR+ASC -T 64 -pre pup.species.nuclear -st DNA
 
 ##mt tree
 
 #mitogenomes were first aligned using clustalX 2.1  
 #the generated final_alignment_file.fasta was used to create maximumlikelihood tree with 1000 boostraps
-cd mt_tree
+cd /scratch/bell/eheenken/projects/current_pupfish/mt_tree
 iqtree -s final_alignment_file.fasta -B 1000 -alrt 1000 -T 64
 
