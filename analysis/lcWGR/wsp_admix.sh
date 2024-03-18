@@ -17,7 +17,7 @@ while [ $j -lt 20 ]
 do
 	for i in {1..7}
 	do
-                 /depot/fnrdewoody/apps/angsd/misc/NGSadmix -P 64  \
+                 NGSadmix -P 64  \
                 -K ${i} -minMaf 0.05 -maxiter 50000 -tol 1e-9 -tolLike50 1e-9 \
                 -likes FINAL.beagle.gz \
                 -outfiles  ADX/R${j}/FINAL_K${i}
