@@ -22,12 +22,10 @@ module load iqtree/2.1.2
 
 cd final_bams
 
-angsd -GL 2 -out /scratch/bell/eheenken/projects/current_pupfish/wgs_tree \
+angsd -GL 2 -out wgs_tree \
  -sites ./FINAL.SITES -P 64 -bam bam.list -doGlf 2 -doMajorMinor 1 -doMaf 1 \
- -ref /scratch/bell/eheenken/projects/current_pupfish/ref/GCF_016077235.1_ASM1607723v1_genomic.fna \
+ -ref GCF_016077235.1_ASM1607723v1_genomic.fna \
  -doBcf 1 -doPost 1 -docounts 1 -dogeno 5
- 
-cd /scratch/bell/eheenken/projects/current_pupfish/wgs_tree
 
 #Generate fasta-alignment from variant calls -this step concatenate all single-nucleotide variants from the VCF for each sample.
 #The resulting sequence alignment file (vcf_kit_tree.o) contained a total of 215,846 sites and is the input for IQ-TREE 
@@ -43,6 +41,6 @@ iqtree -s vcf_kit_tree.o -B 1000 -alrt 1000 -m GTR+ASC -T 64 -pre pup.species.nu
 
 #mitogenomes were first aligned using clustalX 2.1  
 #the generated final_alignment_file.fasta was used to create maximumlikelihood tree with 1000 boostraps
-cd /scratch/bell/eheenken/projects/current_pupfish/mt_tree
+
 iqtree -s final_alignment_file.fasta -B 1000 -alrt 1000 -T 64
 
