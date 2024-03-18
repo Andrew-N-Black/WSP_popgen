@@ -33,14 +33,14 @@ module load picard-tools
 module load bedops
 module load GATK/3.6.0
 module load samtools
-export coalpath=/home/eheenken/CoalQC/scripts
+export coalpath=~/CoalQC/scripts
 cd $SLURM_SUBMIT_DIR
 mkdir ${line[0]}
 cd ${line[0]}
 
 #Preparing the bam alignment file - use available tularosa mitogenome in NCBI and mapped the reads to it. Filterd the reads mapped to it to avoid
 #Nuclear copies of mitochondrial DNA (NUMTs)
-/home/eheenken/CoalQC/scripts/coalqc map -g ../C.tularosa_mt_ref -f ../${line[0]}_R1_001_val_1.fq.gz -r ../${line[0]}_R2_001_val_2.fq.gz -p ./mapped_${line[0]} -n 5
+~/CoalQC/scripts/coalqc map -g ../C.tularosa_mt_ref -f ../${line[0]}_R1_001_val_1.fq.gz -r ../${line[0]}_R2_001_val_2.fq.gz -p ./mapped_${line[0]} -n 5
 
 samtools view -b -F 4 mapped_${line[0]}/mapped_${line[0]}.sort.bam > mapped_${line[0]}.bam
 
