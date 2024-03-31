@@ -7,11 +7,11 @@ POPS=1,2,3
 
 #Input files and names#
 PREFIX=three.pops.10
-COVFILE=/scratch/bell/blackan/PUPFISH/C.tularosa/popgen/poolseq/OKAY/filters/OK_coverage.txt
-SYNC=/scratch/bell/blackan/PUPFISH/C.tularosa/popgen/poolseq/OKAY/OK.sync
-FZFILE=/scratch/bell/blackan/PUPFISH/C.tularosa/popgen/poolseq/OKAY/OK.fz
-BLACKLIST=/scratch/bell/blackan/PUPFISH/C.tularosa/popgen/poolseq/OKAY/filters/OK_poly_all.txt
-OUTDIR=/scratch/bell/blackan/PUPFISH/C.tularosa/popgen/poolseq/OKAY
+COVFILE=OK_coverage.txt
+SYNC=OK.sync
+FZFILE=OK.fz
+BLACKLIST=OK_poly_all.txt
+OUTDIR=Final
 
 #Types of Analyses#
 FST=on

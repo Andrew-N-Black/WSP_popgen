@@ -10,13 +10,13 @@ popmap <- read.delim("popmap", header=FALSE)
 #Add col names
 names(popmap)<-c("sample","population","ESU")
 head(popmap)
-            sample population   ESU
-1 MS-5310_filt.bam         MS ESU-2
-2 MS-5311_filt.bam         MS ESU-2
-3 MS-5312_filt.bam         MS ESU-2
-4 MS-5313_filt.bam         MS ESU-2
-5 MS-5315_filt.bam         MS ESU-2
-6 MS-5319_filt.bam         MS ESU-2
+#            sample population   ESU
+#1 MS-5310_filt.bam         MS ESU-2
+#2 MS-5311_filt.bam         MS ESU-2
+#3 MS-5312_filt.bam         MS ESU-2
+#4 MS-5313_filt.bam         MS ESU-2
+#5 MS-5315_filt.bam         MS ESU-2
+#6 MS-5319_filt.bam         MS ESU-2
 
 #Low Coverage Whole Genome Resequencing pca 
 

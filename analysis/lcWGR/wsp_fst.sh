@@ -111,8 +111,6 @@ realSFS fst stats fst/MS.SC.fst.idx
 
 #first calculate per pop site allele frequency likelihoods (saf) for each population
 
-cd /scratch/bell/blackan/PUPFISH/C.tularosa/popgen/illumina/angsd_out/
-
 angsd -P 64 -out fst/MS \
 -minInd 12 -uniqueOnly 1 -remove_bads 1 -only_proper_pairs 1 -trim 0 -C 50 -baq 1 -minMapQ 30 -minQ 35 \
 -bam ./MS -doCounts 1 -setMinDepth 90 -setMaxDepth 165 -GL 2 -doSaf 1 -anc $REF -ref $REF 

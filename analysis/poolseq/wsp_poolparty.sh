@@ -30,12 +30,6 @@ ml picard-tools/2.18.2
 ./PPalign_inter.sh align_inter.config
  ./PPanalyze.sh analyze_INTER.config
 
-#Done
-
-#move to the path of the executables
-cd /scratch/bell/blackan/poolparty
-
-
 #Define Populations order is defined as
 #head pop*
 #==> pop_1.txt <==

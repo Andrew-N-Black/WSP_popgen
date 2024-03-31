@@ -10,7 +10,7 @@ library(plyr)
 library(data.table)
 
 #Set working directory folder containing all files:
-setwd("Library/CloudStorage/Box-Box/Personal/Postdoc_Purdue/WS_Pupfish/PopulationGenomics/Manuscript/Figures/Files/")
+setwd("Files/")
 
 
 

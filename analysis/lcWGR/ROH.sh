@@ -11,6 +11,7 @@
 module load bioinfo
 module load bcftools
 module load samtools
+module load angsd
 
 #Move to bam folder and generate a bcf
 angsd -GL 1 -dobcf 1 -dopost 1 -domajorminor 1 -domaf 1 -minQ 30 -P 64 \
