@@ -22,7 +22,7 @@ module load use.own
 module load conda-env/gadma-py3.8.5
 
 ### ## LR (ESU1) = 15 ; SC (ESU1) = 14 ; MS (ESU2) = 15 ###
-## Mutation rate: 2.18e-7
+## Mutation rate: 6.6e-08
 
  # CREATE PARAM FILE #
 cd /scratch/bell/mathur20/pupfish/gadma/run2_newMu/
@@ -45,7 +45,7 @@ Sequence length: 963557041
 Linked SNP's : True
 Pts: [20, 30, 40]
 Theta0: Null
-Mutation rate: 2.18e-07
+Mutation rate: 6.6e-08
 Time for generation : 1
 Use moments or dadi : dadi
 Multinom : True
