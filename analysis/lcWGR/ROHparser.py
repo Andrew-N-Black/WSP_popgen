@@ -1,34 +1,37 @@
-    This python script will parse the output ROH file from BCFtools/roh
+"""=================================================================================================
+    Title: ROHfile_parser
+
+    This python script will parse the output ROH file from BCFtools/roh 
     and calculate ROH and F(ROH) of length >= 100kb and >= 1mb
 
     usage:
     #Set the species name in this python script
-        genus-species = ""
-        accession = ""
+        sample = "ROH.txt"
     #Note the quotation marks before and after the arguments
 
     #Then in your cluster directory, type in:
-    python ROHparser.py
+   for i in `ls -1 *ROH.txt`; do python ROHparser.py $i > ${i}_results.txt ; done
 
+Script modified from original created by:
     Jong Yoon Jeon     June 19 2022
 
 ================================================================================================="""
 import sys
 
-#Set the species name and accession number
-genus_species = sys.argv[1]
-print("The species names is " + genus_species)
+#Designate the sample
+sample = sys.argv[1]
+print("The species names is " + sample)
 
 """-------------------------------------------------------------------------------------------------
 Do not edit below this line
 -------------------------------------------------------------------------------------------------"""
 #Set working directory and designate input file
-path_to_directory = "enter path"
+path_to_directory = "/scratch/gautschi/blackan/GROUSE/old_vs_new/roh"
 
 #Estimate ROH based on "PL"
-roh_input = path_to_directory  + genus_species 
-roh_output = path_to_directory + genus_species + "_PL.txt"
-ref_index_file = "ref.fa.fai"
+roh_input = path_to_directory  + sample
+roh_output = path_to_directory + "_PL.txt"
+ref_index_file = "/scratch/gautschi/blackan/GROUSE/old_vs_new/ref/GCF_026119805.1_pur_lepc_1.0_genomic.fna.fai"
 
 #Calculate the length of the reference genome
 #If we use autosomal genome length to calculate ROH later, len_ref should be changed to len_autosome
@@ -43,7 +46,7 @@ print("The length of this reference genome is " + str(len_ref))
 #Check the number of samples in ROH calculation
 #sam_file = path_to_directory + "/theta/bam.filelist"
 #sam_fh = open(sam_file, 'r')
-num_sam = 15
+num_sam = 1
 print("The number of samples is " + str(num_sam))
 
 #Open input and output files
